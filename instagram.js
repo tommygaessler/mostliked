@@ -94,14 +94,24 @@ $(document).ready(function()
 
 					              	success: function(data)
 					              	{
-						                if (data.meta.code == 400)
+						                // if (data.meta.code == 400)
+						                // {
+						                // 	confirm("This user is private!");
+						                // }
+
+														if (data.meta.code == 400)
 						                {
-						                	confirm("This user is private!");
+						                	alert("Please Authenticate!");
 						                }
 
-						                else if (data.data.length == 0)
+						                // else if (data.data.length == 0)
+						                // {
+						                //   	alert("This user has no posts!");
+						                // }
+
+														else if (data.data.length == 0)
 						                {
-						                  	confirm("This user has no posts!");
+						                  	alert("You have no posts!");
 						                }
 
 						                else
