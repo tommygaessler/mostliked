@@ -29,9 +29,6 @@ https://github.com/tommygaessler -->
 				<a href="https://api.instagram.com/oauth/authorize/?client_id=<?php echo $client_id ?>&redirect_uri=http://mostliked.tommygaessler.com&response_type=token&scope=basic">
 					<button>Click here to find out!</button>
 				</a>
-				<!-- <h2>Then enter your username!</h2>
-				<input type="text" placeholder="Enter user-name!"></input> -->
-				<!-- <button>Go!</button> -->
 			</div>
 			<ul class="popular" id="picture">
 			</ul>
