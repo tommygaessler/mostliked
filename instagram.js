@@ -15,8 +15,8 @@ $(document).ready(function()
 	    }
 	});
 
-	$("button").on('click', function()
-	{
+	// $("button").on('click', function()
+	// {
 		if ('createTouch' in document)
 		{
 		    try
@@ -38,7 +38,7 @@ $(document).ready(function()
 		    catch(e){}
 		}
 		instagram();
-  	});
+  	// });
 
   	function instagram()
 	{
@@ -57,7 +57,7 @@ $(document).ready(function()
 	    // else
 	    // {
 
-				console.log(access_token);
+				// console.log(access_token);
 
 		    // $.ajax(
 		    // {
@@ -99,17 +99,17 @@ $(document).ready(function()
 						                // 	confirm("This user is private!");
 						                // }
 
-														if (data.meta.code == 400)
-						                {
-						                	alert("Please Authenticate!");
-						                }
+														// if (data.meta.code == 400)
+						                // {
+						                // 	alert("Please Authenticate!");
+						                // }
 
 						                // else if (data.data.length == 0)
 						                // {
 						                //   	alert("This user has no posts!");
 						                // }
 
-														else if (data.data.length == 0)
+														if (data.data.length == 0)
 						                {
 						                  	alert("You have no posts!");
 						                }

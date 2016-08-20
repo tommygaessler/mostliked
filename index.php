@@ -27,11 +27,11 @@ https://github.com/tommygaessler -->
 			<div class="background">
 				<?php require_once('./client_id.php'); ?>
 				<a href="https://api.instagram.com/oauth/authorize/?client_id=<?php echo $client_id ?>&redirect_uri=http://mostliked.tommygaessler.com&response_type=token&scope=basic">
-					<h2>Click here to Authenticate</h2>
+					<button>Click here to find out!</button>
 				</a>
 				<!-- <h2>Then enter your username!</h2>
 				<input type="text" placeholder="Enter user-name!"></input> -->
-				<button>Go!</button>
+				<!-- <button>Go!</button> -->
 			</div>
 			<ul class="popular" id="picture">
 			</ul>
