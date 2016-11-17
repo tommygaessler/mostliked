@@ -1,1 +1,4 @@
-client_id.php
+.DS_Store
+node_modules/
+npm-debug.log
+*.env
