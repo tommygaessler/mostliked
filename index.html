@@ -13,8 +13,6 @@ https://github.com/tommygaessler -->
     	<link rel="stylesheet" href="genericons/genericons.css">
     	<link rel="stylesheet" href="style.css">
     	<link rel="shortcut icon" type="image/x-icon" href="images/logo.png"/>
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    	<script type="text/javascript" src="instagram.js"></script>
   </head>
 <body>
 	<header>
@@ -25,8 +23,7 @@ https://github.com/tommygaessler -->
 	<main>
 		<div class="wrapper clearfix">
 			<div class="background">
-				<?php require_once('./client_id.php'); ?>
-				<a href="https://api.instagram.com/oauth/authorize/?client_id=60b02974788b40338216c24f02ff142b&redirect_uri=http://mostliked.tommygaessler.com&response_type=token&scope=basic">
+				<a href="https://api.instagram.com/oauth/authorize/?client_id=60b02974788b40338216c24f02ff142b&redirect_uri=http://tommygaessler.com/mostliked&response_type=token&scope=basic">
 					<button>Click here to find out!</button>
 				</a>
 			</div>
@@ -46,5 +43,7 @@ https://github.com/tommygaessler -->
 			</a>
 		</div>
 	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript" src="instagram.js"></script>
 </body>
 </html>
