@@ -26,7 +26,10 @@ $(document).ready(function() {
       }
     } catch (e) {}
   }
-  // instagram();
+
+	if(access_token) {
+		instagram();
+	}
 
   function instagram() {
     $("button").css("background", "#2F4858");
