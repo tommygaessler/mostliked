@@ -7,6 +7,7 @@ https://github.com/tommygaessler*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 * {
 	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
 }
 
 body
@@ -52,7 +53,6 @@ header
 h1, h2, h3, h4
 {
 	text-align: center;
-	font-family: 'Montserrat', sans-serif;
 }
 
 h1
@@ -145,8 +145,17 @@ main .background a:hover
 	background: #2F4858;
 }
 
-.background-likes
+.background-likes h2, .background-likes h3 {
+	margin: 0;
+}
+
+.background-likes h3 {
+	color: #33658A;
+}
+
+.background-likes li
 {
+	padding: 10px;
 	background: white;
 	box-shadow: 0 0 5px 1px rgba(0,0,0,.2);
 }
@@ -175,7 +184,3 @@ footer a {
 		width: 100%;
 	}
 }
-
-/*IG Colors*/
-/*#125688*/
-/*#4090db*/

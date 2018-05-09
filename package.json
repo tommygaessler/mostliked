@@ -1,0 +1,23 @@
+{
+  "name": "mostliked",
+  "version": "1.0.0",
+  "description": "A refactor of my Galvanize JavaScript Workshop Final Project - Instagram changed their api permissions, I no longer have access to public_scope so I made the app work with basic scope, but the user has to be logged in!",
+  "main": "instagram.js",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tommygaessler/mostliked.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tommygaessler/mostliked/issues"
+  },
+  "homepage": "https://github.com/tommygaessler/mostliked#readme"
+}

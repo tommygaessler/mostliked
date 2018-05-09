@@ -5,88 +5,75 @@
 // https://github.com/tommygaessler
 
 $(document).ready(function() {
-  $(document).keypress(function(e) {
-    if (e.which == 13) {
-      $("input").blur();
-      instagram();
-    }
-  });
-
-  if ('createTouch' in document) {
-    try {
-      var ignore = /:hover/;
-      for (var i = 0; i < document.styleSheets.length; i++) {
-        var sheet = document.styleSheets[i];
-        for (var j = sheet.cssRules.length - 1; j >= 0; j--) {
-          var rule = sheet.cssRules[j];
-          if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText)) {
-            sheet.deleteRule(j);
-          }
-        }
-      }
-    } catch (e) {}
-  }
+  // if ('createTouch' in document) {
+  //   try {
+  //     var ignore = /:hover/;
+  //     for (var i = 0; i < document.styleSheets.length; i++) {
+  //       var sheet = document.styleSheets[i];
+  //       for (var j = sheet.cssRules.length - 1; j >= 0; j--) {
+  //         var rule = sheet.cssRules[j];
+  //         if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText)) {
+  //           sheet.deleteRule(j);
+  //         }
+  //       }
+  //     }
+  //   } catch (e) {}
+  // }
 
 	if(access_token) {
-		instagram();
+    // handle dyning authorization
+    $("li").remove();
+    button.innerHTML = 'Loading Posts';
+    $.get('https://api.instagram.com/v1/users/self/?access_token=' + access_token, function(data) {
+      mediaCount = data.data.counts.media;
+      button.innerHTML = 'Loading Posts ' + loadCount + '/' + mediaCount;
+      instagram(url);
+    })
 	}
 
+  function instagram(url) {
+    $.get(url, function(data, status) {
+      loadCount += data.data.length;
+      button.innerHTML = 'Loading Posts ' + loadCount + '/' + mediaCount;
 
-	// recursive function to get all your photos
-  function instagram() {
-    $("button").css("background", "#2F4858");
-    $("li").remove();
-    var compare = [];
+      data.data.forEach((post) => {
+        posts.push(post);
+      });
 
-    $.ajax({
-      type: "GET",
-      dataType: "jsonp",
-      cache: false,
-      url: "https://api.instagram.com/v1/users/self/media/recent/?count=33&access_token=" + access_token + "&count=33",
-
-      success: function(data) {
-        console.log(data);
-
-        if (data.data.length == 0) {
-          alert("You have no posts!");
-        } else {
-          for (var a = 0; a < data.data.length; a++) {
-            var likes = data.data[a].likes.count;
-            // console.log(likes);
-            compare.push(likes);
-          }
-
-          // console.log(compare);
-
-          for (i = 0; i < compare.length; i++) {
-            if (compare[i] > likes) {
-              likes = compare[i];
-              a = compare.indexOf(likes);
-            }
-          }
-
-          // console.log(likes);
-          // console.log(a);
-
-          if (a === 33) {
-            a -= 1;
-            // console.log(a);
-          }
-        }
-
-        if (data.data[a].type == "image") {
-          $(".popular").append("<li><a target='_blank' href='" + data.data[a].link + "'><img src='" + data.data[a].images.standard_resolution.url + "'></img></a></li>");
-        } else if (data.data[a].type == "video") {
-          $(".popular").append("<li><a target='_blank' href='" + data.data[a].link + "'><video src='" + data.data[a].videos.standard_resolution.url + "' autoplay loop></video></a></li>");
-        }
-
-        $(".likes").append("<li><h2>Number of likes: " + likes + "</h2></li>");
-
-        $('html, body').animate({
-          scrollTop: $("#picture").offset().top
-        }, 1500);
+      if(data.pagination.next_url) {
+        instagram(data.pagination.next_url);
+      } else {
+        displayPost();
       }
     });
+  }
+
+  function displayPost() {
+    if (posts.length == 0) {
+      alert("You have no posts!");
+    } else {
+
+      mostLikedPost = posts.reduce(function(prev, current) {
+        return (prev.likes.count > current.likes.count) ? prev : current
+      })
+
+      console.log(mostLikedPost)
+
+      if (mostLikedPost.type == "image") {
+        $(".popular").append("<li><a target='_blank' href='" + mostLikedPost.link + "'><img src='" + mostLikedPost.images.standard_resolution.url + "'></img></a></li>");
+      } else if (mostLikedPost.type == "video") {
+        $(".popular").append("<li><a target='_blank' href='" + mostLikedPost.link + "'><video src='" + mostLikedPost.videos.standard_resolution.url + "' autoplay loop></video></a></li>");
+      }
+
+      $(".likes").append("<li><h2>" + mostLikedPost.likes.count + " Likes</h2></li>");
+
+      $(".likes").append("<li><h3>" + mostLikedPost.caption.text + "</h3></li>");
+
+      $('html, body').animate({
+        scrollTop: $("#picture").offset().top
+      }, 1500);
+    }
+    button.innerHTML = 'Click here to find out!'
     setTimeout(function() {
       $("button").css('background', '');
     }, 500)
@@ -95,3 +82,9 @@ $(document).ready(function() {
 
 var hash = window.location.hash;
 var access_token = hash.replace('#access_token=', '');
+var posts = [];
+var mostLikedPost;
+var url = 'https://api.instagram.com/v1/users/self/media/recent/?count=33&access_token=' + access_token + '&count=33';
+var button = document.getElementById("loader");
+var loadCount = 0;
+var mediaCount;
