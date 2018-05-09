@@ -5,23 +5,8 @@
 // https://github.com/tommygaessler
 
 $(document).ready(function() {
-  // if ('createTouch' in document) {
-  //   try {
-  //     var ignore = /:hover/;
-  //     for (var i = 0; i < document.styleSheets.length; i++) {
-  //       var sheet = document.styleSheets[i];
-  //       for (var j = sheet.cssRules.length - 1; j >= 0; j--) {
-  //         var rule = sheet.cssRules[j];
-  //         if (rule.type === CSSRule.STYLE_RULE && ignore.test(rule.selectorText)) {
-  //           sheet.deleteRule(j);
-  //         }
-  //       }
-  //     }
-  //   } catch (e) {}
-  // }
 
 	if(access_token) {
-    // handle dyning authorization
     $("li").remove();
     button.innerHTML = 'Loading Posts';
     $.get('https://api.instagram.com/v1/users/self/?access_token=' + access_token, function(data) {
@@ -56,8 +41,6 @@ $(document).ready(function() {
       mostLikedPost = posts.reduce(function(prev, current) {
         return (prev.likes.count > current.likes.count) ? prev : current
       })
-
-      console.log(mostLikedPost)
 
       if (mostLikedPost.type == "image") {
         $(".popular").append("<li><a target='_blank' href='" + mostLikedPost.link + "'><img src='" + mostLikedPost.images.standard_resolution.url + "'></img></a></li>");
